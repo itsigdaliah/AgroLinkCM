@@ -32,8 +32,8 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2">
-              <li className="flex items-center"><FaPhone className="mr-2" /> +237 123 456 789</li>
-              <li className="flex items-center"><FaEnvelope className="mr-2" /> info@agrolinkcm.com</li>
+              <li className="flex items-center"><FaPhone className="mr-2" /> +237 675339626</li>
+              <li className="flex items-center"><FaEnvelope className="mr-2" /> routerpjct@gmail.com</li>
               <li className="flex items-center"><FaMapMarkerAlt className="mr-2" /> Yaoundé, Cameroon</li>
             </ul>
           </div>
