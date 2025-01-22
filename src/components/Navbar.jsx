@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="bg-primary text-white">
@@ -28,10 +34,32 @@ function Navbar() {
             <Link to="/" className="hover:text-gray-300">Home</Link>
             <Link to="/marketplace" className="hover:text-gray-300">Marketplace</Link>
             <Link to="/advisory" className="hover:text-gray-300">Advisory</Link>
-            <Link to="/login" className="hover:text-gray-300">Login</Link>
-            <Link to="/signup" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
-              Sign Up
-            </Link>
+            
+            {user ? (
+              <>
+                <div className="flex items-center space-x-4">
+                  <Link to="/dashboard" className="hover:text-gray-300">
+                    <div className="flex items-center space-x-2">
+                      <FaUser />
+                      <span>{user.name}</span>
+                    </div>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="hover:text-gray-300">Login</Link>
+                <Link to="/signup" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -42,8 +70,28 @@ function Navbar() {
               <Link to="/" className="block px-3 py-2 hover:bg-primary-light rounded-md">Home</Link>
               <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">Marketplace</Link>
               <Link to="/advisory" className="block px-3 py-2 hover:bg-primary-light rounded-md">Advisory</Link>
-              <Link to="/login" className="block px-3 py-2 hover:bg-primary-light rounded-md">Login</Link>
-              <Link to="/signup" className="block px-3 py-2 bg-white text-primary rounded-md">Sign Up</Link>
+              
+              {user ? (
+                <>
+                  <Link to="/dashboard" className="block px-3 py-2 hover:bg-primary-light rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <FaUser />
+                      <span>{user.name}</span>
+                    </div>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-3 py-2 bg-white text-primary rounded-md"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="block px-3 py-2 hover:bg-primary-light rounded-md">Login</Link>
+                  <Link to="/signup" className="block px-3 py-2 bg-white text-primary rounded-md">Sign Up</Link>
+                </>
+              )}
             </div>
           </div>
         )}

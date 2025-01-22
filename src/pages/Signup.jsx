@@ -5,24 +5,32 @@ import Input from '../components/ui/Input';
 import Select from '../components/ui/Select';
 import Button from '../components/ui/Button';
 import { signup } from '../utils/auth';
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 function Signup() {
   const navigate = useNavigate();
+  const { login: authLogin } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     role: 'farmer',
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await signup(formData);
+      const { user } = await signup(formData);
+      authLogin(user);
+      toast.success('Account created successfully!');
       navigate('/dashboard');
     } catch (error) {
       toast.error(error.message || 'Signup failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,6 +60,7 @@ function Signup() {
               onChange={handleChange}
               placeholder="Enter your full name"
               icon={FaUser}
+              disabled={loading}
             />
           </div>
 
@@ -68,6 +77,7 @@ function Signup() {
               onChange={handleChange}
               placeholder="Enter your email"
               icon={FaEnvelope}
+              disabled={loading}
             />
           </div>
 
@@ -84,6 +94,7 @@ function Signup() {
               onChange={handleChange}
               placeholder="Create a password"
               icon={FaLock}
+              disabled={loading}
             />
           </div>
 
@@ -97,6 +108,7 @@ function Signup() {
               value={formData.role}
               onChange={handleChange}
               icon={FaUserTag}
+              disabled={loading}
             >
               <option value="farmer">Farmer</option>
               <option value="buyer">Buyer</option>
@@ -104,7 +116,9 @@ function Signup() {
             </Select>
           </div>
 
-          <Button type="submit">Create Account</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Creating account...' : 'Create Account'}
+          </Button>
 
           <div className="text-center">
             <p className="text-sm text-gray-600">

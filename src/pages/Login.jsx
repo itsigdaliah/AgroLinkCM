@@ -4,22 +4,30 @@ import { FaEnvelope, FaLock } from 'react-icons/fa';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { login } from '../utils/auth';
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 function Login() {
   const navigate = useNavigate();
+  const { login: authLogin } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await login(formData);
+      const { user } = await login(formData);
+      authLogin(user);
+      toast.success('Login successful!');
       navigate('/dashboard');
     } catch (error) {
       toast.error(error.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,6 +57,7 @@ function Login() {
               onChange={handleChange}
               placeholder="Enter your email"
               icon={FaEnvelope}
+              disabled={loading}
             />
           </div>
 
@@ -65,6 +74,7 @@ function Login() {
               onChange={handleChange}
               placeholder="Enter your password"
               icon={FaLock}
+              disabled={loading}
             />
           </div>
 
@@ -88,7 +98,9 @@ function Login() {
             </div>
           </div>
 
-          <Button type="submit">Sign in</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign in'}
+          </Button>
 
           <div className="text-center">
             <p className="text-sm text-gray-600">

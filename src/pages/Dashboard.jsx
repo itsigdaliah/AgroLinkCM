@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FaBox, FaChartLine, FaComments, FaBell, FaCog } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -11,8 +13,8 @@ function Dashboard() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Welcome, John Doe</h1>
-              <p className="text-gray-600">Farmer</p>
+              <h1 className="text-2xl font-bold text-gray-900">Welcome, {user.name}</h1>
+              <p className="text-gray-600 capitalize">{user.role}</p>
             </div>
             <div className="flex space-x-4">
               <button className="p-2 text-gray-600 hover:text-primary">
