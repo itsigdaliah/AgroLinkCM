@@ -11,9 +11,9 @@ function Footer() {
             <h3 className="text-xl font-bold mb-4">AgroLink CM</h3>
             <p className="text-sm">Connecting farmers to success in Cameroon</p>
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="hover:text-gray-300"><FaFacebook size={20} /></a>
-              <a href="#" className="hover:text-gray-300"><FaTwitter size={20} /></a>
-              <a href="#" className="hover:text-gray-300"><FaInstagram size={20} /></a>
+              <a href="https://web.facebook.com/profile.php?id=61564123781021" className="hover:text-gray-300"><FaFacebook size={20} /></a>
+              <a href="https://www.x.com/itsigdaliah" className="hover:text-gray-300"><FaTwitter size={20} /></a>
+              <a href="https://www.instagram.com/itsigdaliah" className="hover:text-gray-300"><FaInstagram size={20} /></a>
             </div>
           </div>
 
@@ -33,7 +33,7 @@ function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2">
               <li className="flex items-center"><FaPhone className="mr-2" /> +237 675339626</li>
-              <li className="flex items-center"><FaEnvelope className="mr-2" /> routerpjct@gmail.com</li>
+              <li className="flex items-center"><FaEnvelope className="mr-2" /> itsigdaliah@gmail.com</li>
               <li className="flex items-center"><FaMapMarkerAlt className="mr-2" /> Yaoundé, Cameroon</li>
             </ul>
           </div>
