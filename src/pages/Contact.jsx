@@ -36,21 +36,21 @@ function Contact() {
                 <FaPhone className="text-primary mr-4" />
                 <div>
                   <p className="font-medium">Phone</p>
-                  <p className="text-gray-600">+237 123 456 789</p>
+                  <p className="text-gray-600">+237 675339626</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="text-primary mr-4" />
                 <div>
                   <p className="font-medium">Email</p>
-                  <p className="text-gray-600">info@agrolinkcm.com</p>
+                  <p className="text-gray-600">itsigdaliah@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center">
                 <FaMapMarkerAlt className="text-primary mr-4" />
                 <div>
                   <p className="font-medium">Address</p>
-                  <p className="text-gray-600">123 Farmer's Street, Yaoundé, Cameroon</p>
+                  <p className="text-gray-600">Nouvelle Route Nsimeyong, Yaoundé, Cameroon</p>
                 </div>
               </div>
             </div>
