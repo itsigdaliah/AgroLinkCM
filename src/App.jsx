@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
+import Marketplace from './pages/Marketplace';
+import Advisory from './pages/Advisory';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
                 }
               />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/advisory" element={<Advisory />} />
             </Routes>
           </div>
           <Footer />
