@@ -20,17 +20,13 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
       <div className="p-4">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-bold text-gray-900">{name}</h3>
-          <p className="text-lg font-semibold text-primary">{price} CFA/{unit}</p>
+          <p className="text-base font-semibold text-primary">{price} CFA/{unit}</p>
         </div>
         
         <p className="text-gray-600 text-sm mb-3">{description}</p>
         
-        <div className="flex items-center mb-3">
-          <div className="flex items-center text-yellow-400 mr-2">
-            <FaStar />
-            <span className="ml-1 text-gray-600">{seller.rating}</span>
-          </div>
-          <span className="text-sm text-gray-500">by {seller.name}</span>
+        <div className="mb-3">
+          <span className="text-sm text-gray-500">Seller: {seller.name}</span>
         </div>
 
         <div className="flex items-center justify-between mb-3">
@@ -40,18 +36,21 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
         </div>
 
         <div className="flex items-center space-x-2">
-          <input
-            type="number"
-            min="1"
-            max={stock}
+          <select
             value={quantity}
             onChange={onQuantityChange}
-            className="w-20 px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-          />
+            className="w-16 px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            {[...Array(20)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </select>
           <button
             onClick={() => onAddToCart(product)}
             disabled={stock === 0}
-            className="flex-1 flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 flex items-center justify-center space-x-2 bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
             <FaShoppingCart />
             <span>Add to Cart</span>
