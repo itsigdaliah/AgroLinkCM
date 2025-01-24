@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaShoppingCart } from 'react-icons/fa';
+import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
+  const { cart } = useCart();
 
   const handleLogout = () => {
     logout();
   };
+
+  const cartItemCount = cart?.length || 0;
 
   return (
     <nav className="bg-primary text-white">
@@ -30,10 +34,14 @@ function Navbar() {
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
             <Link to="/" className="hover:text-gray-300">Home</Link>
             <Link to="/marketplace" className="hover:text-gray-300">Marketplace</Link>
             <Link to="/advisory" className="hover:text-gray-300">Advisory</Link>
+          </div>
+
+          {/* Cart and Auth buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             
             {user ? (
               <>
@@ -54,9 +62,16 @@ function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/login" className="hover:text-gray-300">Login</Link>
-                <Link to="/signup" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
-                  Sign Up
+                <Link to="/marketplace" className="hover:text-gray-300 relative">
+                  <FaShoppingCart size={20} />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
+                  Login
                 </Link>
               </>
             )}
@@ -88,8 +103,13 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="block px-3 py-2 hover:bg-primary-light rounded-md">Login</Link>
-                  <Link to="/signup" className="block px-3 py-2 bg-white text-primary rounded-md">Sign Up</Link>
+                  <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <FaShoppingCart />
+                      <span>Cart ({cartItemCount})</span>
+                    </div>
+                  </Link>
+                  <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
                 </>
               )}
             </div>
