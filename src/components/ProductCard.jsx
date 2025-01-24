@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaStar, FaShoppingCart } from 'react-icons/fa';
 
-function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
+function ProductCard({ product, onAddToCart }) {
   const { name, price, description, image, category, unit, stock, seller } = product;
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
@@ -17,7 +18,7 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
         </span>
       </div>
       
-      <div className="p-4">
+      <div className="p-3">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-bold text-gray-900">{name}</h3>
           <p className="text-base font-semibold text-primary">{price} CFA/{unit}</p>
@@ -25,20 +26,22 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
         
         <p className="text-gray-600 text-sm mb-3">{description}</p>
         
+        <div className="border-t border-gray-200 my-3"></div>
+        
         <div className="mb-3">
-          <span className="text-sm text-gray-500">Seller: {seller.name}</span>
+          <span className="text-sm text-gray-500"><span className="font-semibold">Seller:</span> {seller.name}</span>
         </div>
 
         <div className="flex items-center justify-between mb-3">
           <div className="text-sm text-gray-500">
-            Stock: {stock} {unit}s
+            <span className="font-semibold">Stock:</span> {stock} {unit}s
           </div>
         </div>
 
         <div className="flex items-center space-x-2">
           <select
             value={quantity}
-            onChange={onQuantityChange}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
             className="w-16 px-2 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           >
             {[...Array(20)].map((_, i) => (

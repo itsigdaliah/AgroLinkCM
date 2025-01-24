@@ -18,15 +18,10 @@ function Marketplace() {
     image: ''
   });
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleQuantityChange = (e) => {
-    setQuantity(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -59,8 +54,8 @@ function Marketplace() {
     setProducts(products.filter(product => product.id !== id));
   };
 
-  const handleAddToCart = (product) => {
-    const cartItem = { ...product, quantity: parseInt(quantity) };
+  const handleAddToCart = (product, quantity) => {
+    const cartItem = { ...product, quantity };
     setCart([...cart, cartItem]);
   };
 
@@ -155,8 +150,6 @@ function Marketplace() {
               key={product.id}
               product={product}
               onAddToCart={handleAddToCart}
-              quantity={quantity}
-              onQuantityChange={handleQuantityChange}
             />
           ))}
         </div>
