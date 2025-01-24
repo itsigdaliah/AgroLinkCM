@@ -5,7 +5,7 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
   const { name, price, description, image, category, unit, stock, seller } = product;
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
       <div className="relative">
         <img
           src={image || '/images/products/placeholder.jpg'}
@@ -50,9 +50,9 @@ function ProductCard({ product, onAddToCart, quantity, onQuantityChange }) {
           <button
             onClick={() => onAddToCart(product)}
             disabled={stock === 0}
-            className="flex-1 flex items-center justify-center space-x-2 bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 flex items-center justify-center space-x-1 bg-primary text-white px-2 sm:px-6 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
-            <FaShoppingCart />
+            <FaShoppingCart className="text-sm sm:text-base" />
             <span>Add to Cart</span>
           </button>
         </div>
