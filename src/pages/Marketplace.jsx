@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaPlus } from 'react-icons/fa';
+import ProductCard from '../components/ProductCard';
+import AddProductModal from '../components/AddProductModal';
+import productsData from '../data/products';
 
 function Marketplace() {
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Tomatoes', price: 50, description: 'Fresh organic tomatoes' },
-    { id: 2, name: 'Corn', price: 150, description: 'Sweet corn' },
-    { id: 3, name: 'Wheat', price: 200, description: 'High-quality wheat' },
-    { id: 4, name: 'Carrots', price: 50, description: 'Crunchy carrots' },
-    { id: 5, name: 'Potatoes', price: 125, description: 'Organic potatoes' },
-    { id: 6, name: 'Lettuce', price: 25, description: 'Fresh lettuce' },
-    { id: 7, name: 'Onions', price: 50, description: 'Red onions' },
-    { id: 8, name: 'Peppers', price: 25, description: 'Green peppers' },
-    { id: 9, name: 'Cucumbers', price: 100, description: 'Crisp cucumbers' },
-    { id: 10, name: 'Apples', price: 200, description: 'Juicy apples' },
-  ]);
-
-  const [formData, setFormData] = useState({ name: '', price: '', description: '' });
+  const [products, setProducts] = useState(productsData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    description: '',
+    category: '',
+    unit: '',
+    stock: '',
+    image: ''
+  });
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
@@ -32,12 +33,26 @@ function Marketplace() {
     e.preventDefault();
     const newProduct = {
       id: products.length + 1,
-      name: formData.name,
+      ...formData,
       price: parseFloat(formData.price),
-      description: formData.description,
+      stock: parseInt(formData.stock),
+      seller: {
+        id: 1, // This should come from authenticated user
+        name: 'John Doe',
+        rating: 4.5
+      }
     };
     setProducts([...products, newProduct]);
-    setFormData({ name: '', price: '', description: '' });
+    setFormData({
+      name: '',
+      price: '',
+      description: '',
+      category: '',
+      unit: '',
+      stock: '',
+      image: ''
+    });
+    setIsModalOpen(false);
   };
 
   const handleDelete = (id) => {
@@ -95,10 +110,7 @@ function Marketplace() {
       }
 
       if (response.status === 200) {
-        alert(`Payment successful through ${service}:
-          Total Amount: ${totalAmount} CFA
-          Fee (2%): ${fee} CFA
-          Amount to Farmer: ${farmerAmount} CFA`);
+        alert(`Payment successful through ${service}:\n          Total Amount: ${totalAmount} CFA\n          Fee (2%): ${fee} CFA\n          Amount to Farmer: ${farmerAmount} CFA`);
       } else {
         alert('Payment failed. Please try again.');
       }
@@ -119,86 +131,33 @@ function Marketplace() {
           <p className="mt-4 text-lg text-gray-600">Browse and purchase agricultural products</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mb-8">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Product Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price (CFA)</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-              <input
-                type="text"
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                required
-              />
-            </div>
-          </div>
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              Add Product
-            </button>
-          </div>
-        </form>
+        <div className="flex justify-end mb-8">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            <FaPlus className="mr-2" />
+            Add Product
+          </button>
+        </div>
+
+        <AddProductModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleSubmit}
+          formData={formData}
+          onChange={handleChange}
+        />
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map(product => (
-            <div key={product.id} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-bold text-gray-900">{product.name}</h3>
-              <p className="mt-2 text-gray-600">{product.price} CFA</p>
-              <p className="mt-2 text-gray-600">{product.description}</p>
-              <div className="mt-4">
-                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Quantity</label>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                  required
-                />
-              </div>
-              <button
-                onClick={() => handleAddToCart(product)}
-                className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-              >
-                Add to Cart
-              </button>
-              <button
-                onClick={() => handleDelete(product.id)}
-                className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-              >
-                Delete
-              </button>
-            </div>
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+              quantity={quantity}
+              onQuantityChange={handleQuantityChange}
+            />
           ))}
         </div>
 
