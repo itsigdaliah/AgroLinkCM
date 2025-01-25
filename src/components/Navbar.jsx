@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { FaBars, FaTimes, FaUser, FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import CartPanel from './CartPanel';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logout } = useAuth();
   const { cart } = useCart();
 
@@ -23,8 +25,19 @@ function Navbar() {
             <span className="text-xl font-bold">AgroLink CM</span>
           </Link>
           
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile cart and menu buttons */}
+          <div className="md:hidden flex items-center space-x-6">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="hover:text-gray-300 relative"
+            >
+              <FaShoppingCart size={20} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-gray-300"
@@ -62,14 +75,17 @@ function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/marketplace" className="hover:text-gray-300 relative">
+                <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="hover:text-gray-300 relative"
+                >
                   <FaShoppingCart size={20} />
                   {cartItemCount > 0 && (
                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                       {cartItemCount}
                     </span>
                   )}
-                </Link>
+                </button>
                 <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
                   Login
                 </Link>
@@ -102,20 +118,14 @@ function Navbar() {
                   </button>
                 </>
               ) : (
-                <>
-                  <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">
-                    <div className="flex items-center space-x-2">
-                      <FaShoppingCart />
-                      <span>Cart ({cartItemCount})</span>
-                    </div>
-                  </Link>
-                  <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
-                </>
+                <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
               )}
             </div>
           </div>
         )}
       </div>
+
+      <CartPanel isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </nav>
   );
 }

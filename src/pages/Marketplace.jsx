@@ -4,6 +4,8 @@ import { FaPlus } from 'react-icons/fa';
 import ProductCard from '../components/ProductCard';
 import AddProductModal from '../components/AddProductModal';
 import productsData from '../data/products';
+import { useCart } from '../context/CartContext';
+import toast from 'react-hot-toast';
 
 function Marketplace() {
   const [products, setProducts] = useState(productsData);
@@ -17,7 +19,7 @@ function Marketplace() {
     stock: '',
     image: ''
   });
-  const [cart, setCart] = useState([]);
+  const { cart, addToCart, setCart } = useCart();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,9 +56,9 @@ function Marketplace() {
     setProducts(products.filter(product => product.id !== id));
   };
 
-  const handleAddToCart = (product, quantity) => {
-    const cartItem = { ...product, quantity };
-    setCart([...cart, cartItem]);
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    toast.success(`${product.name} added to cart`);
   };
 
   const handleCheckout = async (service) => {
@@ -154,36 +156,7 @@ function Marketplace() {
           ))}
         </div>
 
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900">Cart</h2>
-          {cart.length === 0 ? (
-            <p className="mt-4 text-gray-600">Your cart is empty.</p>
-          ) : (
-            <div className="mt-4">
-              {cart.map((item, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-md mb-4">
-                  <h3 className="text-lg font-bold text-gray-900">{item.name}</h3>
-                  <p className="mt-2 text-gray-600">{item.price} CFA x {item.quantity}</p>
-                  <p className="mt-2 text-gray-600">Total: {item.price * item.quantity} CFA</p>
-                </div>
-              ))}
-              <div className="mt-6">
-                <button
-                  onClick={() => handleCheckout('MTN Mobile Money')}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 mr-4"
-                >
-                  Checkout with MTN Mobile Money
-                </button>
-                <button
-                  onClick={() => handleCheckout('Orange Money')}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-                >
-                  Checkout with Orange Money
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+
       </div>
     </div>
   );

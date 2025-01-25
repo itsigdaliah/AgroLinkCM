@@ -51,7 +51,7 @@ function ProductCard({ product, onAddToCart }) {
             ))}
           </select>
           <button
-            onClick={() => onAddToCart(product)}
+            onClick={() => onAddToCart({ ...product, quantity })}
             disabled={stock === 0}
             className="flex-1 flex items-center justify-center space-x-1 bg-primary text-white px-2 sm:px-6 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
