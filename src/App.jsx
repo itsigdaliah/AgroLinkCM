@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -15,7 +16,8 @@ import Advisory from './pages/Advisory';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <CartProvider>
+        <Router>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <Navbar />
           <div className="flex-grow">
@@ -39,7 +41,8 @@ function App() {
           <Footer />
           <Toaster position="top-center" />
         </div>
-      </Router>
+        </Router>
+      </CartProvider>
     </AuthProvider>
   );
 }
