@@ -27,6 +27,15 @@ function Navbar() {
           
           {/* Mobile cart and menu buttons */}
           <div className="md:hidden flex items-center space-x-6">
+            {user ? (
+              <Link to="/dashboard" className="hover:text-gray-300">
+                <FaUser size={20} />
+              </Link>
+            ) : (
+              <Link to="/login" className="hover:text-gray-300">
+                <FaUser size={20} />
+              </Link>
+            )}
             <button
               onClick={() => setIsCartOpen(true)}
               className="hover:text-gray-300 relative"
@@ -100,28 +109,51 @@ function Navbar() {
             <div className="absolute inset-0 min-h-screen bg-black bg-opacity-50" onClick={() => setIsOpen(false)}></div>
             <div className="relative bg-primary-dark bg-opacity-95">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                <Link to="/" className="block px-3 py-2 hover:bg-primary-light rounded-md">Home</Link>
-                <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">Marketplace</Link>
-                <Link to="/advisory" className="block px-3 py-2 hover:bg-primary-light rounded-md">Advisory</Link>
+                <Link 
+                  to="/" 
+                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  to="/marketplace" 
+                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Marketplace
+                </Link>
+                <Link 
+                  to="/advisory" 
+                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Advisory
+                </Link>
                 
                 {user ? (
                   <>
-                    <Link to="/dashboard" className="block px-3 py-2 hover:bg-primary-light rounded-md">
+                    <Link 
+                      to="/dashboard" 
+                      className="block px-3 py-2 hover:bg-primary-light rounded-md"
+                      onClick={() => setIsOpen(false)}
+                    >
                       <div className="flex items-center space-x-2">
                         <FaUser />
                         <span>{user.name}</span>
                       </div>
                     </Link>
                     <button
-                      onClick={handleLogout}
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
                       className="block w-full text-left px-3 py-2 bg-white text-primary rounded-md"
                     >
                       Logout
                     </button>
                   </>
-                ) : (
-                  <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
