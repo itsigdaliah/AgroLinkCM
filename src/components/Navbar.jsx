@@ -18,7 +18,7 @@ function Navbar() {
   const cartItemCount = cart?.length || 0;
 
   return (
-    <nav className="bg-primary text-white">
+    <nav className="bg-primary-dark text-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
@@ -96,30 +96,33 @@ function Navbar() {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link to="/" className="block px-3 py-2 hover:bg-primary-light rounded-md">Home</Link>
-              <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">Marketplace</Link>
-              <Link to="/advisory" className="block px-3 py-2 hover:bg-primary-light rounded-md">Advisory</Link>
-              
-              {user ? (
-                <>
-                  <Link to="/dashboard" className="block px-3 py-2 hover:bg-primary-light rounded-md">
-                    <div className="flex items-center space-x-2">
-                      <FaUser />
-                      <span>{user.name}</span>
-                    </div>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="block w-full text-left px-3 py-2 bg-white text-primary rounded-md"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
-              )}
+          <div className="fixed left-0 right-0 top-16 z-40">
+            <div className="absolute inset-0 min-h-screen bg-black bg-opacity-50" onClick={() => setIsOpen(false)}></div>
+            <div className="relative bg-primary-dark bg-opacity-95">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link to="/" className="block px-3 py-2 hover:bg-primary-light rounded-md">Home</Link>
+                <Link to="/marketplace" className="block px-3 py-2 hover:bg-primary-light rounded-md">Marketplace</Link>
+                <Link to="/advisory" className="block px-3 py-2 hover:bg-primary-light rounded-md">Advisory</Link>
+                
+                {user ? (
+                  <>
+                    <Link to="/dashboard" className="block px-3 py-2 hover:bg-primary-light rounded-md">
+                      <div className="flex items-center space-x-2">
+                        <FaUser />
+                        <span>{user.name}</span>
+                      </div>
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-3 py-2 bg-white text-primary rounded-md"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link to="/login" className="block px-3 py-2 bg-white text-primary rounded-md">Login</Link>
+                )}
+              </div>
             </div>
           </div>
         )}
