@@ -64,41 +64,36 @@ function Navbar() {
 
           {/* Cart and Auth buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="hover:text-gray-300 relative"
+            >
+              <FaShoppingCart size={20} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
             {user ? (
-              <>
-                <div className="flex items-center space-x-4">
-                  <Link to="/dashboard" className="hover:text-gray-300">
-                    <div className="flex items-center space-x-2">
-                      <FaUser />
-                      <span>{user.name}</span>
-                    </div>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => setIsCartOpen(true)}
-                  className="hover:text-gray-300 relative"
-                >
-                  <FaShoppingCart size={20} />
-                  {cartItemCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {cartItemCount}
-                    </span>
-                  )}
-                </button>
-                <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
-                  Login
+              <div className="flex items-center space-x-4">
+                <Link to="/dashboard" className="hover:text-gray-300">
+                  <div className="flex items-center space-x-2">
+                    <FaUser />
+                    <span>{user.name}</span>
+                  </div>
                 </Link>
-              </>
+                <button
+                  onClick={handleLogout}
+                  className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
+                Login
+              </Link>
             )}
           </div>
         </div>
