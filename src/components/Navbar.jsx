@@ -76,20 +76,12 @@ function Navbar() {
               )}
             </button>
             {user ? (
-              <div className="flex items-center space-x-4">
-                <Link to="/dashboard" className="hover:text-gray-300">
-                  <div className="flex items-center space-x-2">
-                    <FaUser />
-                    <span>{user.name}</span>
-                  </div>
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"
-                >
-                  Logout
-                </button>
-              </div>
+              <Link to="/dashboard" className="hover:text-gray-300">
+                <div className="flex items-center space-x-2">
+                  <FaUser />
+                  <span>{user.name}</span>
+                </div>
+              </Link>
             ) : (
               <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
                 Login
@@ -138,15 +130,7 @@ function Navbar() {
                         <span>{user.name}</span>
                       </div>
                     </Link>
-                    <button
-                      onClick={() => {
-                        handleLogout();
-                        setIsOpen(false);
-                      }}
-                      className="block w-full text-left px-3 py-2 bg-white text-primary rounded-md"
-                    >
-                      Logout
-                    </button>
+
                   </>
                 ) : null}
               </div>

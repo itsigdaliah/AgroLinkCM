@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { FaBox, FaChartLine, FaComments, FaBell, FaCog } from 'react-icons/fa';
+import { FaBox, FaChartLine, FaComments, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -22,6 +24,16 @@ function Dashboard() {
               </button>
               <button className="p-2 text-gray-600 hover:text-primary">
                 <FaCog size={20} />
+              </button>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate('/login');
+                }}
+                className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+              >
+                <FaSignOutAlt />
+                <span>Logout</span>
               </button>
             </div>
           </div>
