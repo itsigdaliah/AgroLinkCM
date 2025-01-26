@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://fictional-waddle-rx6g49jvjrxf56vv-5000.app.github.dev/api';
+const API_URL = 'https://agrolinkcm-bps8.onrender.com/api';
 
 export const setAuthToken = (token) => {
   if (token) {
