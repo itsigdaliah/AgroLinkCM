@@ -6,9 +6,11 @@ import AddProductModal from '../components/AddProductModal';
 import productsData from '../data/products';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 
 function Marketplace() {
   const [products, setProducts] = useState(productsData);
+  const {user} = useAuth()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -57,6 +59,8 @@ function Marketplace() {
   };
 
   const handleAddToCart = (product) => {
+    console.log("added to card")
+    console.log("user here: ", user)
     addToCart(product);
     toast.success(`${product.name} added to cart`);
   };

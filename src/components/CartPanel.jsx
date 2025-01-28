@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { FaTimes, FaTrash, FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import payment from '../lib/pay';
 
 function CartPanel({ isOpen, onClose }) {
+  const {user} = useAuth()
   const panelRef = useRef();
   const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
 
@@ -13,10 +16,23 @@ function CartPanel({ isOpen, onClose }) {
     const fee = totalAmount * 0.02;
     const farmerAmount = totalAmount - fee;
 
-    alert(`Payment successful through ${service}:\n          Total Amount: ${totalAmount} CFA\n          Fee (2%): ${fee} CFA\n          Amount to Farmer: ${farmerAmount} CFA`);
+    alert(`Payment successful through ${user.name} ${service}:\n          Total Amount: ${totalAmount} CFA\n          Fee (2%): ${fee} CFA\n          Amount to Farmer: ${farmerAmount} CFA`);
     clearCart();
     onClose();
   };
+
+  const checkhandlesubmit = () =>{
+  
+    console.log("submitting")
+    console.log("User", user)
+    payment.initiatePay(100000)
+
+
+  }
+
+
+
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -135,7 +151,7 @@ function CartPanel({ isOpen, onClose }) {
               </div>
               <div className="space-y-2">
                 <button
-                  onClick={() => handleCheckout('MTN Mobile Money')}
+                  onClick={() => checkhandlesubmit()}
                   className="w-full py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
                 >
                   Checkout with MTN Mobile Money
@@ -144,7 +160,7 @@ function CartPanel({ isOpen, onClose }) {
                   onClick={() => handleCheckout('Orange Money')}
                   className="w-full py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
                 >
-                  Checkout with Orange Money
+                  Checkout with MTN or Orange Money
                 </button>
               </div>
             </div>
