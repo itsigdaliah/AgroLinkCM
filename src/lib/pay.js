@@ -2,32 +2,33 @@ import axios from "axios";
 
 const baseUrl = "https://live.fapshi.com";
 const headers = {
-  apiuser:"6f38694a-d6e8-4758-93a7-4205a302871c00",
-  apikey:  "FAK_8e3379c597c3e0ec5167b59325c6dfaddd"
+  apiuser:"18cac346-1b5e-48d0-a5ad-ca067faedda7",
+  apikey:  "FAK_9f394dc48a54ea9abb133152b789c1d7"
 };
 
 const payment = {
-  initiatePay(data = {amount}) {
+  initiatePay(amount) {
     return new Promise(async (resolve) => {
       try {
-        if (!data?.amount) resolve(error("amount required", 500));
-        if (!Number.isInteger(data.amount))
-          resolve(error("amount must be of type integer", 500));
-        if (data.amount < 500)
+        if (amount < 500)
+        {
           resolve(error("amount cannot be less than 500 XAF", 500));
-
+          console.log("AMount: ", amount)
+}
         const config = {
           method: "post",
           url: `${baseUrl}/initiate-pay`,
           headers: headers,
-          data: data,
+          data: {amount:amount},
         };
         const response = await axios(config);
         response.data.statusCode = response.status;
+        console.log("response data here", response)
         resolve(response.data);
       } catch (e) {
-        e.response.data.statusCode = e?.response?.status;
+        // e.response.data.statusCode = e?.response?.status;
         resolve(e.response.data);
+        console.log("res er", e.response.data)
         console.log(e);
       }
     });

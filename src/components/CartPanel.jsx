@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import payment from '../lib/pay';
+import toast from 'react-hot-toast';
 
 function CartPanel({ isOpen, onClose }) {
   const {user} = useAuth()
@@ -12,21 +13,40 @@ function CartPanel({ isOpen, onClose }) {
 
   const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  const handleCheckout = (service) => {
+  // const handleCheckout = (service) => {
+  //   const fee = totalAmount * 0.02;
+  //   const farmerAmount = totalAmount - fee;
+
+  //   alert(`Payment successful through ${user.name} ${service}:\n          Total Amount: ${totalAmount} CFA\n          Fee (2%): ${fee} CFA\n          Amount to Farmer: ${farmerAmount} CFA`);
+  //   clearCart();
+  //   onClose();
+  // };
+
+  const checkhandlesubmit = async() =>{
     const fee = totalAmount * 0.02;
-    const farmerAmount = totalAmount - fee;
+    const farmerAmount = Math.floor(totalAmount - fee);
 
-    alert(`Payment successful through ${user.name} ${service}:\n          Total Amount: ${totalAmount} CFA\n          Fee (2%): ${fee} CFA\n          Amount to Farmer: ${farmerAmount} CFA`);
-    clearCart();
-    onClose();
-  };
-
-  const checkhandlesubmit = () =>{
-  
     console.log("submitting")
     console.log("User", user)
-    payment.initiatePay(100000)
+    
+    const res = await payment.initiatePay(farmerAmount)
 
+
+    if(farmerAmount < 500){
+      toast.error("Amount is less than 500XAF")
+      return
+    }
+
+    if(res.statusCode != 200){
+toast.error("error initiating payment")
+return 
+
+    }
+
+    console.log("new data", res)
+
+    window.location.replace(res.link)
+    clearCart()
 
   }
 
@@ -154,14 +174,14 @@ function CartPanel({ isOpen, onClose }) {
                   onClick={() => checkhandlesubmit()}
                   className="w-full py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
                 >
-                  Checkout with MTN Mobile Money
+                Checkout with MTN or Orange Money
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleCheckout('Orange Money')}
                   className="w-full py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
                 >
                   Checkout with MTN or Orange Money
-                </button>
+                </button> */}
               </div>
             </div>
           )}
