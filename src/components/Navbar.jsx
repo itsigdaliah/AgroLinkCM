@@ -60,6 +60,7 @@ function Navbar() {
             <Link to="/" className="hover:text-gray-300">Home</Link>
             <Link to="/marketplace" className="hover:text-gray-300">Marketplace</Link>
             <Link to="/advisory" className="hover:text-gray-300">Advisory</Link>
+            <Link to="/delivery" className="hover:text-gray-300">Delivery</Link>
           </div>
 
           {/* Cart and Auth buttons */}
@@ -116,6 +117,13 @@ function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   Advisory
+                </Link>
+                <Link 
+                  to="/delivery" 
+                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Delivery
                 </Link>
                 
                 {user ? (
