@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
+import deliveryRoutes from './routes/delivery.routes.jsx';
 // import marketplaceRoutes from './routes/marketplace.routes.js';
 // import advisoryRoutes from './routes/advisory.routes.js';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/delivery', deliveryRoutes);
 // app.use('/api/marketplace', marketplaceRoutes);
 // app.use('/api/advisory', advisoryRoutes);
 
