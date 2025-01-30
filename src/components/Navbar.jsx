@@ -4,15 +4,22 @@ import { FaBars, FaTimes, FaUser, FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import CartPanel from './CartPanel';
+import { useTranslation } from 'react-i18next';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logout } = useAuth();
   const { cart } = useCart();
+  const { i18n } = useTranslation();
 
   const handleLogout = () => {
     logout();
+  };
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'fr' : 'en';
+    i18n.changeLanguage(newLang);
   };
 
   const cartItemCount = cart?.length || 0;
@@ -36,6 +43,12 @@ function Navbar() {
                 <FaUser size={20} />
               </Link>
             )}
+            <button
+              onClick={toggleLanguage}
+              className="px-2 py-1 text-sm font-medium hover:text-gray-300"
+            >
+              {i18n.language === 'en' ? 'FR' : 'EN'}
+            </button>
             <button
               onClick={() => setIsCartOpen(true)}
               className="hover:text-gray-300 relative"
@@ -65,6 +78,12 @@ function Navbar() {
 
           {/* Cart and Auth buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <button
+              onClick={toggleLanguage}
+              className="px-2 py-1 text-sm font-medium hover:text-gray-300"
+            >
+              {i18n.language === 'en' ? 'FR' : 'EN'}
+            </button>
             <button
               onClick={() => setIsCartOpen(true)}
               className="hover:text-gray-300 relative"
@@ -146,8 +165,7 @@ function Navbar() {
           </div>
         )}
       </div>
-
-      <CartPanel isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      {isCartOpen && <CartPanel onClose={() => setIsCartOpen(false)} />}
     </nav>
   );
 }
