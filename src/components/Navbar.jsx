@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaBars, FaTimes, FaUser, FaShoppingCart, FaLanguage } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
@@ -7,11 +7,12 @@ import CartPanel from './CartPanel';
 import { useTranslation } from 'react-i18next';
 
 function Navbar() {
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { user, logout } = useAuth();
   const { cart } = useCart();
-  const { i18n } = useTranslation();
 
   const handleLogout = () => {
     logout();
@@ -25,7 +26,7 @@ function Navbar() {
     i18n.changeLanguage(newLang).then(() => {
       // Handle root path special case
       if (currentPath === '/') {
-        window.location.href = `/${newLang}`;
+        navigate(`/${newLang}`);
         return;
       }
       
@@ -34,9 +35,9 @@ function Navbar() {
       const currentLang = pathSegments[1] === 'en' || pathSegments[1] === 'fr' ? pathSegments[1] : null;
       const routePath = currentLang ? pathSegments.slice(2).join('/') : pathSegments.slice(1).join('/');
       
-      // Construct new path with the target language
+      // Construct new path with the target language and navigate
       const newPath = routePath ? `/${newLang}/${routePath}` : `/${newLang}`;
-      window.location.href = newPath;
+      navigate(newPath);
     });
   };
 
@@ -47,7 +48,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to={`/${i18n.language}`} className="flex items-center">
-            <span className="text-xl font-bold">AgroLink CM</span>
+            <span className="text-xl font-bold">{t('common.brand')}</span>
           </Link>
           
           {/* Mobile cart and menu buttons */}
@@ -89,10 +90,10 @@ function Navbar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
-            <Link to={`/${i18n.language}`} className="hover:text-gray-300">Home</Link>
-            <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">Marketplace</Link>
-            <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">Advisory</Link>
-            <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">Delivery</Link>
+            <Link to={`/${i18n.language}`} className="hover:text-gray-300">{t('nav.home')}</Link>
+            <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">{t('nav.marketplace')}</Link>
+            <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">{t('nav.advisory')}</Link>
+            <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">{t('nav.delivery')}</Link>
           </div>
 
           {/* Cart and Auth buttons */}
@@ -119,14 +120,14 @@ function Navbar() {
               <Link to={`/${i18n.language}/dashboard`} className="hover:text-gray-300">
                 <div className="flex items-center space-x-2">
                   <FaUser size={20} />
-                  <span>Dashboard</span>
+                  <span>{t('nav.dashboard')}</span>
                 </div>
               </Link>
             ) : (
               <Link to={`/${i18n.language}/login`} className="hover:text-gray-300">
                 <div className="flex items-center space-x-2">
                   <FaUser size={20} />
-                  <span>Login</span>
+                  <span>{t('nav.login')}</span>
                 </div>
               </Link>
             )}
@@ -137,10 +138,10 @@ function Navbar() {
         {isOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
-              <Link to={`/${i18n.language}`} className="hover:text-gray-300">Home</Link>
-              <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">Marketplace</Link>
-              <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">Advisory</Link>
-              <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">Delivery</Link>
+              <Link to={`/${i18n.language}`} className="hover:text-gray-300">{t('nav.home')}</Link>
+              <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">{t('nav.marketplace')}</Link>
+              <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">{t('nav.advisory')}</Link>
+              <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">{t('nav.delivery')}</Link>
             </div>
           </div>
         )}
