@@ -1,0 +1,29 @@
+{
+  "home": {
+    "hero": {
+      "title": "Connecting Farmers to Success",
+      "subtitle": "Join Cameroon's Premier Farming and Advisory Platform",
+      "getStarted": "Get Started",
+      "exploreMarket": "Explore Market"
+    },
+    "features": {
+      "title": "Why Choose AgroLink CM?",
+      "directMarket": {
+        "title": "Direct Market Access",
+        "description": "Connect directly with buyers and get better prices for your products"
+      },
+      "expertAdvisory": {
+        "title": "Expert Advisory",
+        "description": "Get real-time farming advice from experts"
+      },
+      "mobilePayments": {
+        "title": "Mobile Payments",
+        "description": "Secure and easy payments with MTN and Orange Money"
+      },
+      "marketInsights": {
+        "title": "Market Insights",
+        "description": "Access real-time market prices and trends"
+      }
+    }
+  }
+}

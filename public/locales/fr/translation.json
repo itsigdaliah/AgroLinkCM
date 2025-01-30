@@ -1,0 +1,29 @@
+{
+  "home": {
+    "hero": {
+      "title": "Connecter les Agriculteurs au Succès",
+      "subtitle": "Rejoignez la première plateforme agricole et de conseil au Cameroun",
+      "getStarted": "Commencer",
+      "exploreMarket": "Explorer le Marché"
+    },
+    "features": {
+      "title": "Pourquoi Choisir AgroLink CM ?",
+      "directMarket": {
+        "title": "Accès Direct au Marché",
+        "description": "Connectez-vous directement avec les acheteurs et obtenez de meilleurs prix pour vos produits"
+      },
+      "expertAdvisory": {
+        "title": "Conseil d'Experts",
+        "description": "Obtenez des conseils agricoles en temps réel de la part d'experts"
+      },
+      "mobilePayments": {
+        "title": "Paiements Mobiles",
+        "description": "Paiements sécurisés et faciles avec MTN et Orange Money"
+      },
+      "marketInsights": {
+        "title": "Aperçu du Marché",
+        "description": "Accédez aux prix et tendances du marché en temps réel"
+      }
+    }
+  }
+}

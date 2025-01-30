@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { FaBars, FaTimes, FaUser, FaShoppingCart } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaShoppingCart, FaLanguage } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import CartPanel from './CartPanel';
@@ -19,7 +19,25 @@ function Navbar() {
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'fr' : 'en';
-    i18n.changeLanguage(newLang);
+    const currentPath = window.location.pathname;
+    
+    // Change the language first to ensure immediate UI update
+    i18n.changeLanguage(newLang).then(() => {
+      // Handle root path special case
+      if (currentPath === '/') {
+        window.location.href = `/${newLang}`;
+        return;
+      }
+      
+      // Extract the current route without language prefix
+      const pathSegments = currentPath.split('/');
+      const currentLang = pathSegments[1] === 'en' || pathSegments[1] === 'fr' ? pathSegments[1] : null;
+      const routePath = currentLang ? pathSegments.slice(2).join('/') : pathSegments.slice(1).join('/');
+      
+      // Construct new path with the target language
+      const newPath = routePath ? `/${newLang}/${routePath}` : `/${newLang}`;
+      window.location.href = newPath;
+    });
   };
 
   const cartItemCount = cart?.length || 0;
@@ -28,26 +46,27 @@ function Navbar() {
     <nav className="bg-primary-dark text-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center">
+          <Link to={`/${i18n.language}`} className="flex items-center">
             <span className="text-xl font-bold">AgroLink CM</span>
           </Link>
           
           {/* Mobile cart and menu buttons */}
           <div className="md:hidden flex items-center space-x-6">
             {user ? (
-              <Link to="/dashboard" className="hover:text-gray-300">
+              <Link to={`/${i18n.language}/dashboard`} className="hover:text-gray-300">
                 <FaUser size={20} />
               </Link>
             ) : (
-              <Link to="/login" className="hover:text-gray-300">
+              <Link to={`/${i18n.language}/login`} className="hover:text-gray-300">
                 <FaUser size={20} />
               </Link>
             )}
             <button
               onClick={toggleLanguage}
-              className="px-2 py-1 text-sm font-medium hover:text-gray-300"
+              className="flex items-center space-x-1 px-2 py-1 text-sm font-medium hover:text-gray-300"
             >
-              {i18n.language === 'en' ? 'FR' : 'EN'}
+              <FaLanguage size={20} />
+              <span>{i18n.language === 'en' ? 'FR' : 'EN'}</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -70,19 +89,20 @@ function Navbar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
-            <Link to="/" className="hover:text-gray-300">Home</Link>
-            <Link to="/marketplace" className="hover:text-gray-300">Marketplace</Link>
-            <Link to="/advisory" className="hover:text-gray-300">Advisory</Link>
-            <Link to="/delivery" className="hover:text-gray-300">Delivery</Link>
+            <Link to={`/${i18n.language}`} className="hover:text-gray-300">Home</Link>
+            <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">Marketplace</Link>
+            <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">Advisory</Link>
+            <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">Delivery</Link>
           </div>
 
           {/* Cart and Auth buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={toggleLanguage}
-              className="px-2 py-1 text-sm font-medium hover:text-gray-300"
+              className="flex items-center space-x-1 px-2 py-1 text-sm font-medium hover:text-gray-300"
             >
-              {i18n.language === 'en' ? 'FR' : 'EN'}
+              <FaLanguage size={20} />
+              <span>{i18n.language === 'en' ? 'FR' : 'EN'}</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
@@ -96,15 +116,18 @@ function Navbar() {
               )}
             </button>
             {user ? (
-              <Link to="/dashboard" className="hover:text-gray-300">
+              <Link to={`/${i18n.language}/dashboard`} className="hover:text-gray-300">
                 <div className="flex items-center space-x-2">
-                  <FaUser />
-                  <span>{user.name}</span>
+                  <FaUser size={20} />
+                  <span>Dashboard</span>
                 </div>
               </Link>
             ) : (
-              <Link to="/login" className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100">
-                Login
+              <Link to={`/${i18n.language}/login`} className="hover:text-gray-300">
+                <div className="flex items-center space-x-2">
+                  <FaUser size={20} />
+                  <span>Login</span>
+                </div>
               </Link>
             )}
           </div>
@@ -112,60 +135,19 @@ function Navbar() {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="fixed left-0 right-0 top-16 z-40">
-            <div className="absolute inset-0 min-h-screen bg-black bg-opacity-50" onClick={() => setIsOpen(false)}></div>
-            <div className="relative bg-primary-dark bg-opacity-95">
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                <Link 
-                  to="/" 
-                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Home
-                </Link>
-                <Link 
-                  to="/marketplace" 
-                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Marketplace
-                </Link>
-                <Link 
-                  to="/advisory" 
-                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Advisory
-                </Link>
-                <Link 
-                  to="/delivery" 
-                  className="block px-3 py-2 hover:bg-primary-light rounded-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Delivery
-                </Link>
-                
-                {user ? (
-                  <>
-                    <Link 
-                      to="/dashboard" 
-                      className="block px-3 py-2 hover:bg-primary-light rounded-md"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <FaUser />
-                        <span>{user.name}</span>
-                      </div>
-                    </Link>
-
-                  </>
-                ) : null}
-              </div>
+          <div className="md:hidden py-4">
+            <div className="flex flex-col space-y-4">
+              <Link to={`/${i18n.language}`} className="hover:text-gray-300">Home</Link>
+              <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">Marketplace</Link>
+              <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">Advisory</Link>
+              <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">Delivery</Link>
             </div>
           </div>
         )}
+
+        {/* Cart panel */}
+        <CartPanel isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
       </div>
-      {isCartOpen && <CartPanel onClose={() => setIsCartOpen(false)} />}
     </nav>
   );
 }

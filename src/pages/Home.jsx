@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FaLeaf, FaUsers, FaMobile, FaChartLine } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -9,23 +12,23 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Connecting Farmers to Success
+              {t('home.hero.title')}
             </h1>
             <p className="text-xl mb-8">
-              Join Cameroon's leading agricultural marketplace and advisory platform
+              {t('home.hero.subtitle')}
             </p>
             <div className="space-x-4">
               <Link
                 to="/signup"
                 className="bg-white text-primary px-8 py-3 rounded-md font-semibold hover:bg-gray-100"
               >
-                Get Started
+                {t('home.hero.getStarted')}
               </Link>
               <Link
                 to="/marketplace"
                 className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-primary-light"
               >
-                Explore Market
+                {t('home.hero.exploreMarket')}
               </Link>
             </div>
           </div>
@@ -35,27 +38,27 @@ function Home() {
       {/* Features Section */}
       <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose AgroLink CM?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">{t('home.features.title')}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeatureCard
               icon={<FaLeaf />}
-              title="Direct Market Access"
-              description="Connect directly with buyers and get better prices for your produce"
+              title={t('home.features.directMarket.title')}
+              description={t('home.features.directMarket.description')}
             />
             <FeatureCard
               icon={<FaUsers />}
-              title="Expert Advisory"
-              description="Get real-time farming advice from agricultural experts"
+              title={t('home.features.expertAdvisory.title')}
+              description={t('home.features.expertAdvisory.description')}
             />
             <FeatureCard
               icon={<FaMobile />}
-              title="Mobile Payments"
-              description="Secure and easy payments with MTN and Orange Money"
+              title={t('home.features.mobilePayments.title')}
+              description={t('home.features.mobilePayments.description')}
             />
             <FeatureCard
               icon={<FaChartLine />}
-              title="Market Insights"
-              description="Access real-time market prices and trends"
+              title={t('home.features.marketInsights.title')}
+              description={t('home.features.marketInsights.description')}
             />
           </div>
         </div>
