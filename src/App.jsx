@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Contact from './pages/Contact';
 import Marketplace from './pages/Marketplace';
 import Advisory from './pages/Advisory';
+import Delivery from './pages/Delivery';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/advisory" element={<Advisory />} />
+               <Route path="/delivery" element={<Delivery />} />
             </Routes>
           </div>
           <Footer />
