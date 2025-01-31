@@ -4,7 +4,10 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useDropzone } from 'react-dropzone';
 
+import { useTranslation } from 'react-i18next';
+
 function Delivery() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     carState: '',
     location: '',
@@ -39,18 +42,18 @@ function Delivery() {
 
     try {
       await axios.post('/api/delivery', data);
-      toast.success('Delivery information submitted successfully!');
+      toast.success(t('delivery.submitSuccess'));
     } catch (error) {
-      toast.error('Failed to submit delivery information');
+      toast.error(t('delivery.submitError'));
     }
   };
 
   const handleRating = async (driverId, rating) => {
     try {
       await axios.post(`/api/delivery/rate/${driverId}`, { rating });
-      toast.success('Driver rated successfully!');
+      toast.success(t('delivery.ratingSuccess'));
     } catch (error) {
-      toast.error('Failed to rate driver');
+      toast.error(t('delivery.ratingError'));
     }
   };
 
@@ -58,14 +61,14 @@ function Delivery() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900">Delivery Page</h1>
-          <p className="mt-4 text-lg text-gray-600">Submit your delivery information</p>
+          <h1 className="text-4xl font-bold text-gray-900">{t('delivery.title')}</h1>
+          <p className="mt-4 text-lg text-gray-600">{t('delivery.subtitle')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="carState" className="block text-sm font-medium text-gray-700">
-              Car State
+              {t('delivery.carState')}
             </label>
             <input
               id="carState"
@@ -80,7 +83,7 @@ function Delivery() {
 
           <div>
             <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-              Location
+              {t('delivery.location')}
             </label>
             <input
               id="location"
@@ -95,7 +98,7 @@ function Delivery() {
 
           <div>
             <label htmlFor="nationalId" className="block text-sm font-medium text-gray-700">
-              National ID
+              {t('delivery.nationalId')}
             </label>
             <div {...getRootPropsNationalId()} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 p-2 cursor-pointer">
               <input {...getInputPropsNationalId()} />

@@ -7,9 +7,24 @@ import productsData from '../data/products';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
+import { productTranslations } from '../data/translations';
 
 function Marketplace() {
-  const [products, setProducts] = useState(productsData);
+  const { t, i18n } = useTranslation();
+  const [products, setProducts] = useState(() => {
+    const translatedProducts = productTranslations[i18n.language].products.map(translatedProduct => {
+      const baseProduct = productsData.find(p => p.id === translatedProduct.id);
+      return {
+        ...baseProduct,
+        name: translatedProduct.name,
+        description: translatedProduct.description,
+        category: translatedProduct.category,
+        unit: translatedProduct.unit
+      };
+    });
+    return translatedProducts;
+  });
   const {user} = useAuth()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -62,7 +77,7 @@ function Marketplace() {
     console.log("added to card")
     console.log("user here: ", user)
     addToCart(product);
-    toast.success(`${product.name} added to cart`);
+    toast.success(t('marketplace.addedToCart', { name: product.name }));
   };
 
   const handleCheckout = async (service) => {
@@ -128,8 +143,8 @@ function Marketplace() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900">Marketplace</h1>
-          <p className="mt-4 text-lg text-gray-600">Browse and purchase agricultural products</p>
+          <h1 className="text-4xl font-bold text-gray-900">{t('marketplace.title')}</h1>
+          <p className="mt-4 text-lg text-gray-600">{t('marketplace.subtitle')}</p>
         </div>
 
         <div className="flex justify-end mb-8">
@@ -138,7 +153,7 @@ function Marketplace() {
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           >
             <FaPlus className="mr-2" />
-            Add Product
+            {t('marketplace.addProduct')}
           </button>
         </div>
 

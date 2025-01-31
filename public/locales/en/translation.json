@@ -7,8 +7,54 @@
     "marketplace": "Marketplace",
     "advisory": "Advisory",
     "delivery": "Delivery",
-    "dashboard": "Dashboard",
+    "dashboard": "Admin",
     "login": "Login"
+  },
+  "marketplace": {
+    "title": "Agricultural Marketplace",
+    "subtitle": "Buy and sell agricultural products directly from farmers",
+    "addProduct": "Add Product",
+    "addedToCart": "{{name}} added to cart"
+  },
+  "advisory": {
+    "title": "Agricultural Advisory Services",
+    "subtitle": "Get expert advice for your farming needs"
+  },
+  "delivery": {
+    "title": "Delivery Services",
+    "subtitle": "Register as a delivery partner",
+    "carState": "Vehicle Condition",
+    "location": "Current Location",
+    "nationalId": "National ID",
+    "submitSuccess": "Registration submitted successfully",
+    "submitError": "Error submitting registration",
+    "ratingSuccess": "Rating submitted successfully",
+    "ratingError": "Error submitting rating"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "roles": {
+      "farmer": "Farmer",
+      "buyer": "Buyer",
+      "expert": "Expert"
+    },
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "logout": "Logout",
+    "stats": {
+      "listings": "Active Listings",
+      "listingsTrend": "+{{count}} this week",
+      "sales": "Total Sales",
+      "salesTrend": "+{{percent}}% vs last month",
+      "advisory": "Advisory Sessions",
+      "advisoryTrend": "{{count}} pending"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "listings": "Listings",
+      "advisory": "Advisory"
+    },
+    "content": "Dashboard content for {{tab}} tab"
   },
   "footer": {
     "tagline": "Connecting farmers to success in Cameroon",
@@ -27,32 +73,5 @@
       "subscribe": "Subscribe"
     },
     "copyright": "All rights reserved."
-  },
-  "home": {
-    "hero": {
-      "title": "Connecting Farmers to Success",
-      "subtitle": "Join Cameroon's Premier Farming and Advisory Platform",
-      "getStarted": "Get Started",
-      "exploreMarket": "Explore Market"
-    },
-    "features": {
-      "title": "Why Choose AgroLink CM?",
-      "directMarket": {
-        "title": "Direct Market Access",
-        "description": "Connect directly with buyers and get better prices for your products"
-      },
-      "expertAdvisory": {
-        "title": "Expert Advisory",
-        "description": "Get real-time farming advice from experts"
-      },
-      "mobilePayments": {
-        "title": "Mobile Payments",
-        "description": "Secure and easy payments with MTN and Orange Money"
-      },
-      "marketInsights": {
-        "title": "Market Insights",
-        "description": "Access real-time market prices and trends"
-      }
-    }
   }
 }

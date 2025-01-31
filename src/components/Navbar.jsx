@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { FaBars, FaTimes, FaUser, FaShoppingCart, FaLanguage } from 'react-icons/fa';
+import { FaBars, FaTimes, FaUser, FaShoppingCart, FaGlobe } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import CartPanel from './CartPanel';
@@ -66,7 +66,7 @@ function Navbar() {
               onClick={toggleLanguage}
               className="flex items-center space-x-1 px-2 py-1 text-sm font-medium hover:text-gray-300"
             >
-              <FaLanguage size={20} />
+              <FaGlobe size={20} />
               <span>{i18n.language === 'en' ? 'FR' : 'EN'}</span>
             </button>
             <button
@@ -102,7 +102,7 @@ function Navbar() {
               onClick={toggleLanguage}
               className="flex items-center space-x-1 px-2 py-1 text-sm font-medium hover:text-gray-300"
             >
-              <FaLanguage size={20} />
+              <FaGlobe size={20} />
               <span>{i18n.language === 'en' ? 'FR' : 'EN'}</span>
             </button>
             <button

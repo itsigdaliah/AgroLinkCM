@@ -4,11 +4,57 @@
   },
   "nav": {
     "home": "Accueil",
-    "marketplace": "Marché",
+    "marketplace": "Boutique",
     "advisory": "Conseil",
     "delivery": "Livraison",
-    "dashboard": "Tableau de bord",
+    "dashboard": "Admin",
     "login": "Connexion"
+  },
+  "marketplace": {
+    "title": "Marché Agricole",
+    "subtitle": "Achetez et vendez des produits agricoles directement auprès des agriculteurs",
+    "addProduct": "Ajouter un Produit",
+    "addedToCart": "{{name}} ajouté au panier"
+  },
+  "advisory": {
+    "title": "Services de Conseil Agricole",
+    "subtitle": "Obtenez des conseils d'experts pour vos besoins agricoles"
+  },
+  "delivery": {
+    "title": "Services de Livraison",
+    "subtitle": "Inscrivez-vous comme partenaire de livraison",
+    "carState": "État du Véhicule",
+    "location": "Localisation Actuelle",
+    "nationalId": "Carte d'Identité",
+    "submitSuccess": "Inscription soumise avec succès",
+    "submitError": "Erreur lors de la soumission de l'inscription",
+    "ratingSuccess": "Évaluation soumise avec succès",
+    "ratingError": "Erreur lors de la soumission de l'évaluation"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {{name}}",
+    "roles": {
+      "farmer": "Agriculteur",
+      "buyer": "Acheteur",
+      "expert": "Expert"
+    },
+    "notifications": "Notifications",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "stats": {
+      "listings": "Annonces Actives",
+      "listingsTrend": "+{{count}} cette semaine",
+      "sales": "Ventes Totales",
+      "salesTrend": "+{{percent}}% vs le mois dernier",
+      "advisory": "Sessions de Conseil",
+      "advisoryTrend": "{{count}} en attente"
+    },
+    "tabs": {
+      "overview": "Aperçu",
+      "listings": "Annonces",
+      "advisory": "Conseil"
+    },
+    "content": "Contenu du tableau de bord pour l'onglet {{tab}}"
   },
   "footer": {
     "tagline": "Connecter les agriculteurs au succès au Cameroun",
@@ -27,32 +73,5 @@
       "subscribe": "S'abonner"
     },
     "copyright": "Tous droits réservés."
-  },
-  "home": {
-    "hero": {
-      "title": "Connecter les Agriculteurs au Succès",
-      "subtitle": "Rejoignez la première plateforme agricole et de conseil au Cameroun",
-      "getStarted": "Commencer",
-      "exploreMarket": "Explorer le Marché"
-    },
-    "features": {
-      "title": "Pourquoi Choisir AgroLink CM ?",
-      "directMarket": {
-        "title": "Accès Direct au Marché",
-        "description": "Connectez-vous directement avec les acheteurs et obtenez de meilleurs prix pour vos produits"
-      },
-      "expertAdvisory": {
-        "title": "Conseil d'Experts",
-        "description": "Obtenez des conseils agricoles en temps réel de la part d'experts"
-      },
-      "mobilePayments": {
-        "title": "Paiements Mobiles",
-        "description": "Paiements sécurisés et faciles avec MTN et Orange Money"
-      },
-      "marketInsights": {
-        "title": "Aperçu du Marché",
-        "description": "Accédez aux prix et tendances du marché en temps réel"
-      }
-    }
   }
 }
