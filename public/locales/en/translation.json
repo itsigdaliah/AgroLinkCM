@@ -1,4 +1,31 @@
 {
+  "home": {
+    "hero": {
+      "title": "Empowering Agriculture in Cameroon",
+      "subtitle": "Connect, Trade, and Grow with AgroLink CM",
+      "getStarted": "Get Started",
+      "exploreMarket": "Explore Market"
+    },
+    "features": {
+      "title": "Why Choose AgroLink CM",
+      "directMarket": {
+        "title": "Direct Market Access",
+        "description": "Connect directly with buyers and sellers, eliminating intermediaries"
+      },
+      "expertAdvisory": {
+        "title": "Expert Advisory",
+        "description": "Get professional agricultural advice from industry experts"
+      },
+      "mobilePayments": {
+        "title": "Secure Mobile Payments",
+        "description": "Easy and secure transactions through mobile money services"
+      },
+      "marketInsights": {
+        "title": "Market Insights",
+        "description": "Stay informed with real-time market trends and prices"
+      }
+    }
+  },
   "common": {
     "brand": "AgroLink CM"
   },

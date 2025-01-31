@@ -1,4 +1,31 @@
 {
+  "home": {
+    "hero": {
+      "title": "Autonomiser l'Agriculture au Cameroun",
+      "subtitle": "Connectez, Échangez et Développez avec AgroLink CM",
+      "getStarted": "Commencer",
+      "exploreMarket": "Explorer le Marché"
+    },
+    "features": {
+      "title": "Pourquoi Choisir AgroLink CM",
+      "directMarket": {
+        "title": "Accès Direct au Marché",
+        "description": "Connectez-vous directement avec les acheteurs et les vendeurs, éliminant les intermédiaires"
+      },
+      "expertAdvisory": {
+        "title": "Conseil d'Expert",
+        "description": "Obtenez des conseils agricoles professionnels d'experts du secteur"
+      },
+      "mobilePayments": {
+        "title": "Paiements Mobiles Sécurisés",
+        "description": "Transactions faciles et sécurisées via les services d'argent mobile"
+      },
+      "marketInsights": {
+        "title": "Aperçu du Marché",
+        "description": "Restez informé des tendances et des prix du marché en temps réel"
+      }
+    }
+  },
   "common": {
     "brand": "AgroLink CM"
   },
