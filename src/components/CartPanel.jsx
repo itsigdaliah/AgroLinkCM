@@ -57,12 +57,15 @@ return
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (panelRef.current && !panelRef.current.contains(event.target)) {
-        onClose();
+        onClose && onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      // Add a small delay to prevent immediate closing when opening
+      setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
     }
 
     return () => {
@@ -87,8 +90,9 @@ return
               Shopping Cart ({cart.length} item{cart.length !== 1 ? 's' : ''})
             </h2>
             <button
-              onClick={onClose}
+              onClick={() => onClose && onClose()}
               className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Close cart"
             >
               <FaTimes className="text-gray-600" />
             </button>
