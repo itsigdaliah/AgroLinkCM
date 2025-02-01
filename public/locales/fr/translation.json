@@ -1,0 +1,104 @@
+{
+  "home": {
+    "hero": {
+      "title": "Autonomiser l'Agriculture au Cameroun",
+      "subtitle": "Connectez, Échangez et Développez avec AgroLink CM",
+      "getStarted": "Commencer",
+      "exploreMarket": "Explorer le Marché"
+    },
+    "features": {
+      "title": "Pourquoi Choisir AgroLink CM",
+      "directMarket": {
+        "title": "Accès Direct au Marché",
+        "description": "Connectez-vous directement avec les acheteurs et les vendeurs, éliminant les intermédiaires"
+      },
+      "expertAdvisory": {
+        "title": "Conseil d'Expert",
+        "description": "Obtenez des conseils agricoles professionnels d'experts du secteur"
+      },
+      "mobilePayments": {
+        "title": "Paiements Mobiles Sécurisés",
+        "description": "Transactions faciles et sécurisées via les services d'argent mobile"
+      },
+      "marketInsights": {
+        "title": "Aperçu du Marché",
+        "description": "Restez informé des tendances et des prix du marché en temps réel"
+      }
+    }
+  },
+  "common": {
+    "brand": "AgroLink CM"
+  },
+  "nav": {
+    "home": "Accueil",
+    "marketplace": "Boutique",
+    "advisory": "Conseil",
+    "delivery": "Livraison",
+    "dashboard": "Admin",
+    "login": "Connexion"
+  },
+  "marketplace": {
+    "title": "Marché Agricole",
+    "subtitle": "Achetez et vendez des produits agricoles directement auprès des agriculteurs",
+    "addProduct": "Ajouter un Produit",
+    "addedToCart": "{{name}} ajouté au panier"
+  },
+  "advisory": {
+    "title": "Services de Conseil Agricole",
+    "subtitle": "Obtenez des conseils d'experts pour vos besoins agricoles"
+  },
+  "delivery": {
+    "title": "Services de Livraison",
+    "subtitle": "Inscrivez-vous comme partenaire de livraison",
+    "carState": "État du Véhicule",
+    "location": "Localisation Actuelle",
+    "nationalId": "Carte d'Identité",
+    "submitSuccess": "Inscription soumise avec succès",
+    "submitError": "Erreur lors de la soumission de l'inscription",
+    "ratingSuccess": "Évaluation soumise avec succès",
+    "ratingError": "Erreur lors de la soumission de l'évaluation"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {{name}}",
+    "roles": {
+      "farmer": "Agriculteur",
+      "buyer": "Acheteur",
+      "expert": "Expert"
+    },
+    "notifications": "Notifications",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "stats": {
+      "listings": "Annonces Actives",
+      "listingsTrend": "+{{count}} cette semaine",
+      "sales": "Ventes Totales",
+      "salesTrend": "+{{percent}}% vs le mois dernier",
+      "advisory": "Sessions de Conseil",
+      "advisoryTrend": "{{count}} en attente"
+    },
+    "tabs": {
+      "overview": "Aperçu",
+      "listings": "Annonces",
+      "advisory": "Conseil"
+    },
+    "content": "Contenu du tableau de bord pour l'onglet {{tab}}"
+  },
+  "footer": {
+    "tagline": "Connecter les agriculteurs au succès au Cameroun",
+    "quickLinks": {
+      "title": "Liens Rapides",
+      "about": "À Propos",
+      "contact": "Contact"
+    },
+    "contact": {
+      "title": "Contactez-nous"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Restez informé de nos dernières nouvelles",
+      "emailPlaceholder": "Entrez votre email",
+      "subscribe": "S'abonner"
+    },
+    "copyright": "Tous droits réservés."
+  }
+}

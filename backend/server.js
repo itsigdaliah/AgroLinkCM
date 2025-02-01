@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
 import { Groq } from "groq-sdk"; 
+
+import deliveryRoutes from './routes/delivery.routes.jsx';
+
 // import marketplaceRoutes from './routes/marketplace.routes.js';
 // import advisoryRoutes from './routes/advisory.routes.js';
 
@@ -17,6 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+
 
 app.post("/api/groq", async (req, res) => {
   try {

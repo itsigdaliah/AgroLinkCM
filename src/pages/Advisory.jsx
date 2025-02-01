@@ -46,6 +46,9 @@ const advisorySections = [
   }
 ];
 
+import { useTranslation } from 'react-i18next';
+import { advisoryTranslations } from '../data/advisoryTranslations';
+
 function Advisory() {
   const [expanded, setExpanded] = useState(null);
 
