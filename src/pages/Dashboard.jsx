@@ -8,11 +8,11 @@ function Dashboard() {
 
   const renderDashboard = () => {
     switch (user.role) {
-      case 'farmers':
+      case 'farmer':
         return <FarmerDashboard />;
       case 'buyer':
         return <BuyerDashboard />;
-      case 'farmer':
+      case 'admin':
         return <AdminDashboard />;
       default:
         return <FarmerDashboard />;
