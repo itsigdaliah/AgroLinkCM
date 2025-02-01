@@ -116,7 +116,10 @@ function Navbar() {
         )}
         
         {/* Cart panel */}
-        <CartPanel isOpen={isCartOpen} setIsOpen={setIsCartOpen} />
+        <CartPanel 
+          isOpen={isCartOpen} 
+          onClose={() => setIsCartOpen(false)} 
+        />
       </div>
     </nav>
   );
