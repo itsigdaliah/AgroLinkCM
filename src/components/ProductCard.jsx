@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { FaStar, FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Ensure authentication context is imported
 
 function ProductCard({ product, onAddToCart }) {
   const { name, price, description, image, category, unit, stock, seller } = product;
   const [quantity, setQuantity] = useState(1);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    if (!user) {
+      navigate('/login'); 
+      return;
+    }
+    onAddToCart({ ...product, quantity });
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
@@ -51,7 +63,7 @@ function ProductCard({ product, onAddToCart }) {
             ))}
           </select>
           <button
-            onClick={() => onAddToCart({ ...product, quantity })}
+            onClick={handleAddToCart}
             disabled={stock === 0}
             className="flex-1 flex items-center justify-center space-x-1 bg-primary text-white px-2 sm:px-6 py-2 rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >

@@ -60,6 +60,7 @@ function Navbar() {
             <Link to="/" className="hover:text-gray-300">Home</Link>
             <Link to="/marketplace" className="hover:text-gray-300">Marketplace</Link>
             <Link to="/advisory" className="hover:text-gray-300">Advisory</Link>
+            {user && (<Link to="/dashboard" className="hover:text-gray-300">Dashboard</Link>)}
           </div>
 
           {/* Cart and Auth buttons */}
@@ -74,6 +75,19 @@ function Navbar() {
                       <span>{user.name}</span>
                     </div>
                   </Link>
+
+                  <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="hover:text-gray-300 relative"
+                >
+                  <FaShoppingCart size={20} />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </button>
+                  
                   <button
                     onClick={handleLogout}
                     className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"

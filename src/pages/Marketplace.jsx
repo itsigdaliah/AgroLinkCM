@@ -131,25 +131,27 @@ function Marketplace() {
           <h1 className="text-4xl font-bold text-gray-900">Marketplace</h1>
           <p className="mt-4 text-lg text-gray-600">Browse and purchase agricultural products</p>
         </div>
+        {user?.role === 'farmer' && (
+  <>
+    <div className="flex justify-end mb-8">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+      >
+        <FaPlus className="mr-2" />
+        Add Product
+      </button>
+    </div>
 
-        <div className="flex justify-end mb-8">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-          >
-            <FaPlus className="mr-2" />
-            Add Product
-          </button>
-        </div>
-
-        <AddProductModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleSubmit}
-          formData={formData}
-          onChange={handleChange}
-        />
-
+    <AddProductModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      onSubmit={handleSubmit}
+      formData={formData}
+      onChange={handleChange}
+    />
+  </>
+)}
         <div className="grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map(product => (
             <ProductCard

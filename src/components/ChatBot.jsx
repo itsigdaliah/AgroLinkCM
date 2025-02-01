@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
+import ReactMarkdown from 'react-markdown';
 
 function ChatBot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hello! I\'m your AgroLink assistant. How can I help you today?'
+      content: "Hello! I'm your AgroLink assistant. How can I help you today?"
     }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const chatContainerRef = useRef(null); 
+
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,33 +56,29 @@ function ChatBot() {
 
   return (
     <div className="flex flex-col h-[500px]">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+     
+      <div 
+        ref={chatContainerRef} 
+        className="flex-1 overflow-y-auto p-4 space-y-4"
+        style={{ scrollBehavior: 'smooth' }}
+      >
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`flex ${
-              message.role === 'user' ? 'justify-end' : 'justify-start'
-            }`}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
-                message.role === 'user'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-100 text-gray-800'
+                message.role === 'user' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'
               }`}
             >
-              {/* Use ReactMarkdown to render the message content */}
-              <ReactMarkdown>
-                {message.content}
-              </ReactMarkdown>
+              <ReactMarkdown>{message.content}</ReactMarkdown>
             </div>
           </div>
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg p-3 text-gray-800">
-              Thinking...
-            </div>
+            <div className="bg-gray-100 rounded-lg p-3 text-gray-800">Thinking...</div>
           </div>
         )}
       </div>
