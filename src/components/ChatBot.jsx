@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
 
 function ChatBot() {
   const [messages, setMessages] = useState([
@@ -21,7 +22,7 @@ function ChatBot() {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/groq', {
+      const response = await axios.post('https://agrolinkcm-bps8.onrender.com/api/groq', {
         messages: [userMessage]
       });
 
@@ -57,7 +58,10 @@ function ChatBot() {
                   : 'bg-gray-100 text-gray-800'
               }`}
             >
-              {message.content}
+              {/* Use ReactMarkdown to render the message content */}
+              <ReactMarkdown>
+                {message.content}
+              </ReactMarkdown>
             </div>
           </div>
         ))}

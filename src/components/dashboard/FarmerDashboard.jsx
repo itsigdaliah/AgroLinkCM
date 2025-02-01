@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaBox, FaChartLine, FaComments, FaBell, FaCog, FaRobot, FaTimes } from 'react-icons/fa';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format } from 'date-fns';
-import ChatBot from '../ChatBot';
+import ChatBot from '../ChatBot'; // Import the ChatBot component
 
 const data = [
   { date: '2024-01', sales: 4000, yield: 2400 },
@@ -126,7 +126,7 @@ function FarmerDashboard() {
 
         {/* Chatbot Button */}
         <button
-          onClick={() => setShowChatbot(true)}
+          onClick={() => setShowChatbot(!showChatbot)}
           className="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark transition-colors"
         >
           <FaRobot size={24} />
@@ -134,7 +134,7 @@ function FarmerDashboard() {
 
         {/* Chatbot Modal */}
         {showChatbot && (
-          <div className="fixed bottom-18 right-8 w-96 bg-white rounded-lg shadow-xl">
+          <div className="fixed bottom-24 right-8 w-96 bg-white rounded-lg shadow-xl border border-gray-200">
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold">AgroLink Assistant</h3>
               <button
