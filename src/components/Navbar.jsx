@@ -90,10 +90,14 @@ function Navbar() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
+
+           
+           
             <Link to={`/${i18n.language}`} className="hover:text-gray-300">{t('nav.home')}</Link>
             <Link to={`/${i18n.language}/marketplace`} className="hover:text-gray-300">{t('nav.marketplace')}</Link>
             <Link to={`/${i18n.language}/advisory`} className="hover:text-gray-300">{t('nav.advisory')}</Link>
-            <Link to={`/${i18n.language}/delivery`} className="hover:text-gray-300">{t('nav.delivery')}</Link>
+             {user && (<Link to="/dashboard" className="hover:text-gray-300">Dashboard</Link>)}
+
           </div>
 
           {/* Cart and Auth buttons */}
@@ -117,10 +121,39 @@ function Navbar() {
               )}
             </button>
             {user ? (
+              <>
+                <div className="flex items-center space-x-4">
+                  <Link to="/dashboard" className="hover:text-gray-300">
+                    <div className="flex items-center space-x-2">
+                      <FaUser />
+                      <span>{user.name}</span>
+                    </div>
+                  </Link>
+
+                  <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="hover:text-gray-300 relative"
+                >
+                  <FaShoppingCart size={20} />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </button>
+                  
+                  <button
+                    onClick={handleLogout}
+                    className="bg-white text-primary px-4 py-2 rounded-md hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+
               <Link to={`/${i18n.language}/dashboard`} className="hover:text-gray-300">
                 <div className="flex items-center space-x-2">
                   <FaUser size={20} />
                   <span>{t('nav.dashboard')}</span>
+
                 </div>
               </Link>
             ) : (

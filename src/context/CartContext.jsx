@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from 'react';
+import { useAuth } from '../context/AuthContext'; // Import authentication context
+import { useNavigate } from 'react-router-dom'; // Import navigation hook
 
 const CartContext = createContext();
 
@@ -12,8 +14,15 @@ export function useCart() {
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const { user } = useAuth();
 
-  const addToCart = (item) => {
+
+  const addToCart = (item, navigate) => {
+    if (!user) {
+      navigate('/signin');
+      return;
+    }
+
     setCart(prevCart => {
       const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
       if (existingItem) {
